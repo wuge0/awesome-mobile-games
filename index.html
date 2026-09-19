@@ -121,13 +121,13 @@ function cardHTML(item) {
   const repo = item.repo;
   const imgSrc = repo ? `https://opengraph.githubassets.com/1/${encodeURIComponent(repo)}` : '';
   const img = repo
-    ? `<img data-src="${imgSrc}" alt="${escapeHtml(item.name)} preview" loading="lazy" class="w-full bg-gray-800" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">`
+    ? `<img data-src="${imgSrc}" alt="${escapeHtml(item.name)} preview" loading="lazy" class="w-full bg-gray-900 absolute inset-0 z-10 opacity-0 transition-opacity duration-300" style="object-fit: cover;" onload="this.classList.remove('opacity-0'); this.nextElementSibling.style.display='none';" onerror="this.style.display='none';">`
     : '';
   return `
     <article class="card rounded-xl overflow-hidden flex flex-col fade-in" data-cat="${escapeHtml(item.category)}" data-sub="${escapeHtml(item.subcategory)}" data-search="${escapeHtml((item.name + ' ' + item.desc + ' ' + item.source_text + ' ' + item.category).toLowerCase())}">
-      <div class="relative bg-gray-900">
+      <div class="relative bg-gray-900" style="aspect-ratio: 1200 / 600;">
         ${img}
-        <div class="placeholder absolute inset-0 hidden" style="position: absolute;">
+        <div class="placeholder absolute inset-0 z-0">
           <div>
             <div class="text-2xl mb-1">🎮</div>
             <div>${escapeHtml(item.name)}</div>
